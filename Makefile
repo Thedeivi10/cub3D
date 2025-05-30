@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/05/30 17:38:26 by davigome         ###   ########.fr        #
+#    Updated: 2025/05/30 17:53:58 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,6 @@ libft:
 $(LIBFT_LIB): libft
 
 all:$(NAME)
-
-bonus: $(BONUS_NAME)
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean
