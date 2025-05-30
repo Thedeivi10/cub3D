@@ -1,0 +1,9 @@
+*.sw
+*.pdf
+*.md
+.vscode
+#*
+#!ex*
+#!ex*/*.cpp
+#!ex*/*.hpp
+#!ex*/Makefile
