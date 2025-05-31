@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/05/30 17:53:58 by davigome         ###   ########.fr        #
+#    Updated: 2025/05/31 18:17:54 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,11 @@ LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
 LIBFT_REPO = https://github.com/Thedeivi10/libft.git
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+
+#TESTS
+
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/p.cub
+
 
 # Colores
 RED = \033[31m
@@ -67,6 +72,9 @@ libft:
 $(LIBFT_LIB): libft
 
 all:$(NAME)
+
+valgrind:
+	$(VALGRIND)
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean
