@@ -6,13 +6,19 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/05/31 22:32:09 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:00:44 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
 void	ft_free_map(t_map *game);
+
+void	ft_bad_close(t_map *game)
+{
+	ft_free_map(game);
+	exit(EXIT_FAILURE);
+}
 
 int	ft_count_lines(char *map, t_map *game)
 {
@@ -24,8 +30,7 @@ int	ft_count_lines(char *map, t_map *game)
 	if (fd == -1)
 	{
 		fprintf(stderr, "Error\nCould not open the file to count lines.\n");
-		ft_free_map(game);
-		exit(EXIT_FAILURE);
+		ft_bad_close(game);
 	}
 	line = get_next_line(fd);
 	len = 0;
@@ -73,8 +78,7 @@ void	ft_read_2(int fd, char *line, t_map *game)
 		{
 			fprintf(stderr, "Error\nCould not duplicate line.\n");
 			free(line);
-			ft_free_map(game);
-			exit(EXIT_FAILURE);
+			ft_bad_close(game);
 		}
 		free(line);
 		i++;
@@ -98,15 +102,13 @@ void	ft_read_map(t_map *game, char **argv)
 	if (!game->grid)
 	{
 		fprintf(stderr, "Error\nCould not allocate memory for the gird.\n");
-		ft_free_map(game);
-		 exit(EXIT_FAILURE);
+		ft_bad_close(game);
 	}
 	line = get_next_line(fd);
 	if (!line)
 	{
 		fprintf(stderr, "Error\nThe map is empty\n");
-		ft_free_map(game);
-		exit(EXIT_FAILURE);
+		ft_bad_close(game);
 	}
 	ft_read_2(fd, line, game);
 	close(fd);
@@ -144,7 +146,6 @@ void	ft_init_elem(t_elem *elem)
 	elem->n = 0;
 	elem->s = 0;
 	elem->w = 0;
-	elem->flag = 0;	
 }
 
 void	ft_check_elements_2(t_map *game, t_elem *elem)
@@ -153,22 +154,163 @@ void	ft_check_elements_2(t_map *game, t_elem *elem)
 		|| elem->n > 1 || elem->s > 1 || elem->w > 1)
 	{
 		fprintf(stderr, "Error\nYou must specify each texture one time.\n");
-		ft_free_map(game);
-		exit(EXIT_FAILURE);
+		ft_bad_close(game);
 	}
 	if (elem->c < 1 || elem->e < 1 || elem->f < 1
 		|| elem->n < 1 || elem->s < 1 || elem->w < 1)
 	{
 		fprintf(stderr, "Error\nYou must specify each texture one time.\n");
-		ft_free_map(game);
-		exit(EXIT_FAILURE);
+		ft_bad_close(game);
 	}
+}
+
+void	ft_check_elements_rep(t_map *game, int i, t_elem *elem)
+{
+	if (game->grid[i][0] == 'N')
+		++elem->n;
+	if (game->grid[i][0] == 'S')
+		++elem->s;
+	if (game->grid[i][0] == 'W')
+		++elem->w;
+	if (game->grid[i][0] == 'E')
+		++elem->e;
+	if (game->grid[i][0] == 'F')
+		++elem->f;
+	if (game->grid[i][0] == 'C')
+		++elem->c;
+}
+
+void	ft_check_n(t_map *game, int i)
+{
+	if (game->grid[i][1] != 'O')
+	{
+		fprintf(stderr, "Error\nThe texture north must be NO");
+		ft_bad_close(game);
+	}
+	if (game->grid[i][i + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween NO and the texture must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] <= 32)
+		;
+	if (!game->grid[i][i])
+	{
+		fprintf(stderr, "Error\nThere is no a path for NO texture");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
+	if (game->grid[i][i + 1] != 10)
+	{
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		ft_bad_close(game);
+	}
+}
+
+void	ft_check_s(t_map *game, int i)
+{
+	if (game->grid[i][1] != 'O')
+	{
+		fprintf(stderr, "Error\nThe texture south must be SO");
+		ft_bad_close(game);
+	}
+	if (game->grid[i][i + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween SO and the texture must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] <= 32)
+		;
+	if (!game->grid[i][i])
+	{
+		fprintf(stderr, "Error\nThere is no a path for SO texture");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
+	if (game->grid[i][i + 1] != 10)
+	{
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		ft_bad_close(game);
+	}
+}
+
+void	ft_check_w(t_map *game, int i)
+{
+	if (game->grid[i][1] != 'E')
+	{
+		fprintf(stderr, "Error\nThe texture west must be WE");
+		ft_bad_close(game);
+	}
+	if (game->grid[i][i + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween WE and the texture must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] <= 32)
+		;
+	if (!game->grid[i][i])
+	{
+		fprintf(stderr, "Error\nThere is no a path for WE texture");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
+	if (game->grid[i][i + 1] != 10)
+	{
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		ft_bad_close(game);
+	}
+}
+
+void	ft_check_e(t_map *game, int i)
+{
+	if (game->grid[i][1] != 'A')
+	{
+		fprintf(stderr, "Error\nThe texture west must be EA");
+		ft_bad_close(game);
+	}
+	if (game->grid[i][i + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween EA and the texture must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] <= 32)
+		;
+	if (!game->grid[i][i])
+	{
+		fprintf(stderr, "Error\nThere is no a path for EA texture");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
+	if (game->grid[i][i + 1] != 10)
+	{
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		ft_bad_close(game);
+	}
+}
+
+void	ft_check_f(t_map *game, int i)
+{
+	int j;
+	
+	if (game->grid[i][i + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween EA and the texture must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++i] <= 32)
+		;
+	j = i;
+	while (game->grid[i][j] >= '0' && game->grid[i][j] <= '9')
+		++j;
+}
+
+void	ft_check_c(t_map *game, int i)
+{
 	
 }
 
-void	ft_check_elements(t_map *game)
+void	ft_check_elements_3(t_map *game)
 {
-	t_elem	*elem;
 	int		i;
 
 	i = -1;
@@ -179,20 +321,41 @@ void	ft_check_elements(t_map *game)
 			&& game->grid[i][0] != 'F' && game->grid[i][0] != 'C'
 			&& game->grid[i][0] != '\n')
 			break;
-		if (game->grid[i][0] != 'N')
-			++elem->n;
-		if (game->grid[i][0] != 'S')
-			++elem->s;
-		if (game->grid[i][0] != 'W')
-			++elem->w;
-		if (game->grid[i][0] != 'E')
-			++elem->e;
-		if (game->grid[i][0] != 'F')
-			++elem->f;
-		if (game->grid[i][0] != 'C')
-			++elem->c;
+		if (game->grid[i][0] == 'N')
+			ft_check_n(game, i);
+		if (game->grid[i][0] == 'S')
+			ft_check_s(game, i);
+		if (game->grid[i][0] == 'W')
+			ft_check_w(game, i);
+		if (game->grid[i][0] == 'E')
+			ft_check_e(game, i);
+		if (game->grid[i][0] == 'F')
+			ft_check_f(game, i);
+		if (game->grid[i][0] == 'C')
+			ft_check_c(game, i);
+	}
+}
+
+void	ft_check_elements(t_map *game)
+{
+	t_elem	*elem;
+	int		i;
+
+	i = -1;
+	elem = malloc(sizeof(t_elem));
+	ft_init_elem(elem);
+	while (game->grid[++i])
+	{
+		if (game->grid[i][0] != 'N' && game->grid[i][0] != 'S'
+			&& game->grid[i][0] != 'W' && game->grid[i][0] != 'E'
+			&& game->grid[i][0] != 'F' && game->grid[i][0] != 'C'
+			&& game->grid[i][0] != '\n')
+			break;
+		ft_check_elements_rep(game, i, elem);
 	}
 	ft_check_elements_2(game, elem);
+	free(elem);
+	ft_check_elements_3(game); 
 }
 
 void	ft_checks(t_map *game, char **argv)
@@ -211,5 +374,6 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		fprintf(stderr, "Error\ncub3D needs a .cub map.\n");
 	ft_checks(game, argv);
+	ft_free_map(game);
 	return (EXIT_SUCCESS);
 }

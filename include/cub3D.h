@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/05/31 21:58:56 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:01:59 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_elem
 	int w;
 	int c;
 	int f;
-	int	flag;
 }				t_elem;
 
 #endif
