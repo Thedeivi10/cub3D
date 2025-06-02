@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/02 11:35:43 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/02 20:26:00 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,11 @@ SRC_DIR			= ./sources
 
 OBJ_DIR			= ./obj
 
-SRC_FILES		= cub3D.c
+SRC_FILES		= cub3D.c\
+					utils.c\
+					utils_2.c\
+					elemts.c\
+					check_nswe.c\
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
