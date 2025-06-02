@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 18:25:17 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:34:37 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,7 +369,6 @@ int	ft_check_num(t_map *game, int i, int aux,int j)
 		ft_bad_close(game);
 	}
 	aux = ft_atoi(temp);
-	printf("%i\n", aux);
 	if (aux > 255 || aux < 0)
 	{
 		free(temp);
@@ -406,7 +405,7 @@ void	ft_check_f(t_map *game, int i, int j)
 	while (++times < 3)
 	{
 		aux = j;
-		if (game->grid[i][j] > 9 || game->grid[i][j] < 0)
+		if (game->grid[i][j] > '9' || game->grid[i][j] < '0')
 		{
 			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include.\n");
 			ft_bad_close(game);
