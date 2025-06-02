@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 13:12:38 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:38:58 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -543,7 +543,7 @@ void	ft_check_start(t_map *game, int i)
 	t_start	*start;
 	int		j;
 
-	start = malloc(sizeof(start));
+	start = malloc(sizeof(t_start));
 	ft_init_start(start);
 	while(game->grid[i])
 	{
@@ -568,19 +568,25 @@ void	ft_flood_fill(char **cpy, int i, int j, t_map *game)
 {
 	if (cpy[i][j] == '1' || cpy[i][j] == 'V')
 		return ;
-	if ((cpy[i][j + 1] != '0' && cpy[i][j + 1] != 'N' && cpy[i][j + 1] != 'S'
-		&& cpy[i][j + 1] != 'E' && cpy[i][j + 1] != 'W') || (cpy[i][j - 1] != '0'
-		&& cpy[i][j - 1] != 'N' && cpy[i][j - 1] != 'S'&& cpy[i][j - 1] != 'E' 
-		&& cpy[i][j - 1] != 'W') || (cpy[i + 1][j] != '0' && cpy[i + 1][j] != 'N'
-		&& cpy[i + 1][j] != 'S'&& cpy[i + 1][j] != 'E' && cpy[i + 1][j] != 'W')
-		|| (cpy[i - 1][j] != '0' && cpy[i - 1][j] != 'N' && cpy[i - 1][j] != 'S'
-		&& cpy[i - 1][j] != 'E' && cpy[i - 1][j] != 'W'))
+	if (!cpy[i + 1])
 	{
 		fprintf(stderr, "Error\nYour map have not the correct structure.\n");
 		ft_free_matrix(cpy);
 		ft_bad_close(game);
 	}
 	cpy[i][j] = 'V';
+	if ((cpy[i][j + 1] != '0' && cpy[i][j + 1] != 'N' && cpy[i][j + 1] != 'S'
+		&& cpy[i][j + 1] != 'E' && cpy[i][j + 1] != 'W' && cpy[i][j + 1] != 'V' && cpy[i][j + 1] != '1') || (cpy[i][j - 1] != '0'
+		&& cpy[i][j - 1] != 'N' && cpy[i][j - 1] != 'S'&& cpy[i][j - 1] != 'E' 
+		&& cpy[i][j - 1] != 'W' && cpy[i][j - 1] != 'V' && cpy[i][j - 1] != '1') || (cpy[i + 1][j] != '0' && cpy[i + 1][j] != 'N'
+		&& cpy[i + 1][j] != 'S'&& cpy[i + 1][j] != 'E' && cpy[i + 1][j] != 'W' && cpy[i + 1][j] != 'V'  && cpy[i + 1][j] != '1')
+		|| (cpy[i - 1][j] != '0' && cpy[i - 1][j] != 'N' && cpy[i - 1][j] != 'S'
+		&& cpy[i - 1][j] != 'E' && cpy[i - 1][j] != 'W' && cpy[i - 1][j] != 'V' && cpy[i - 1][j] != '1'))
+	{
+		fprintf(stderr, "Error\nYour map have not the correct structure.\n");
+		ft_free_matrix(cpy);
+		ft_bad_close(game);
+	}
 	ft_flood_fill(cpy, i + 1, j, game);
 	ft_flood_fill(cpy, i, j + 1, game);
 	ft_flood_fill(cpy, i - 1, j, game);
@@ -598,7 +604,9 @@ void	ft_check_path(t_map *game, int i)
 		j = -1;
 		while (game->grid[i][++j])
 		{
-			if (game->grid[i][j] == '0')
+			if (game->grid[i][j] == '0' || game->grid[i][j] == 'N'
+				|| game->grid[i][j] == 'S' || game->grid[i][j] == 'W'
+				|| game->grid[i][j] == 'S')
 			{
 				cpy = ft_cpy_matrix(game->grid);
 				ft_flood_fill(cpy, i, j, game);
