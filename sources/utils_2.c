@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:06:27 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 20:10:35 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:02:48 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ void	ft_read_map(t_map *game, char **argv)
 
 void	ft_check_name(char **argv)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(argv[1]);
-	if (argv[1][len - 1] != 'b' ||  argv[1][len - 2] != 'u'
+	if (argv[1][len - 1] != 'b' || argv[1][len - 2] != 'u'
 		|| argv[1][len - 3] != 'c' || argv[1][len - 4] != '.')
 	{
 		fprintf(stderr, "Error\nThe map must end with .cub.\n");

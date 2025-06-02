@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/02 20:26:00 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/02 21:35:07 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,6 @@ MLX42		= ./MLX42
 LIBFT		= ./libft
 INCLUDES	= -I$(MLX42)/include -I$(LIBFT)/include -I ./include
 LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
-# Libft
-
-LIBFT_REPO = https://github.com/Thedeivi10/libft.git
-LIBFT_DIR = libft
-LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 #TESTS
 
@@ -45,6 +40,11 @@ SRC_FILES		= cub3D.c\
 					utils_2.c\
 					elemts.c\
 					check_nswe.c\
+					check_aux_fc.c\
+					check_fc.c\
+					checks.c\
+					checks_2.c\
+					checks_3.c\
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -65,16 +65,6 @@ $(MLX42)/build/libmlx42.a:
 	@cmake --build $(MLX42)/build -j4
 	@echo "$(GREEN)MLX42 library built successfully!$(RESET)"
 
-
-libft:
-	@if [ ! -d "$(LIBFT_DIR)" ]; then \
-		echo "Cloning $(YELLOW)libft$(RESET) repository..."; \
-		git clone $(LIBFT_REPO) > /dev/null 2>&1; \
-	fi
-		@$(MAKE) -C $(LIBFT_DIR) > /dev/null 2>&1
-
-$(LIBFT_LIB): libft
-
 all:$(NAME)
 
 valgrind:
@@ -87,8 +77,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
-	@rm -rf $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
 
