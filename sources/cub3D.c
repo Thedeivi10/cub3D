@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/01 22:00:44 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 10:16:14 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,46 @@ void	ft_bad_close(t_map *game)
 {
 	ft_free_map(game);
 	exit(EXIT_FAILURE);
+}
+
+static int	space(const char *str, int cont)
+{
+	if ((str[cont] >= 9 && str[cont] <= 13) || str[cont] == 32)
+		return (1);
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	size_t	cont;
+	int		number;
+	int		neg;
+
+	cont = 0;
+	number = 0;
+	neg = 1;
+	while (space(str, cont))
+		cont++;
+	if (str[cont] == '-' || str[cont] == '+')
+	{
+		if (str[cont] == '-')
+			neg = -1;
+		cont++;
+	}
+	while (ft_isdigit(str[cont]))
+	{
+		number = number * 10 + (str[cont] - 48);
+		cont++;
+	}
+	number = neg * number;
+	return (number);
 }
 
 int	ft_count_lines(char *map, t_map *game)
@@ -180,138 +220,202 @@ void	ft_check_elements_rep(t_map *game, int i, t_elem *elem)
 		++elem->c;
 }
 
-void	ft_check_n(t_map *game, int i)
+void	ft_check_n(t_map *game, int i, int j)
 {
 	if (game->grid[i][1] != 'O')
 	{
-		fprintf(stderr, "Error\nThe texture north must be NO");
+		fprintf(stderr, "Error\nThe texture north must be NO.\n");
 		ft_bad_close(game);
 	}
-	if (game->grid[i][i + 1] != ' ')
+	if (game->grid[i][j + 1] != 32)
 	{
 		fprintf(stderr, "Error\nBetween NO and the texture must be a space.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] <= 32)
+	while(game->grid[i][++j] <= 32)
 		;
-	if (!game->grid[i][i])
+	if (!game->grid[i][j])
 	{
-		fprintf(stderr, "Error\nThere is no a path for NO texture");
+		fprintf(stderr, "Error\nThere is no a path for NO texture.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
-	if (game->grid[i][i + 1] != 10)
+	while(game->grid[i][++j] > 32 && game->grid[i][j] < 127)
+		;
+	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path.\n");
 		ft_bad_close(game);
 	}
 }
 
-void	ft_check_s(t_map *game, int i)
+void	ft_check_s(t_map *game, int i, int j)
 {
 	if (game->grid[i][1] != 'O')
 	{
-		fprintf(stderr, "Error\nThe texture south must be SO");
+		fprintf(stderr, "Error\nThe texture south must be SO.\n");
 		ft_bad_close(game);
 	}
-	if (game->grid[i][i + 1] != ' ')
+	if (game->grid[i][j + 1] != ' ')
 	{
 		fprintf(stderr, "Error\nBetween SO and the texture must be a space.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] <= 32)
+	while(game->grid[i][++j] <= 32)
 		;
-	if (!game->grid[i][i])
+	if (!game->grid[i][j])
 	{
-		fprintf(stderr, "Error\nThere is no a path for SO texture");
+		fprintf(stderr, "Error\nThere is no a path for SO texture.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
-	if (game->grid[i][i + 1] != 10)
+	while(game->grid[i][++j] > 32 && game->grid[i][j] < 127)
+		;
+	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path.\n");
 		ft_bad_close(game);
 	}
 }
 
-void	ft_check_w(t_map *game, int i)
+void	ft_check_w(t_map *game, int i, int j)
 {
 	if (game->grid[i][1] != 'E')
 	{
-		fprintf(stderr, "Error\nThe texture west must be WE");
+		fprintf(stderr, "Error\nThe texture west must be WE.\n");
 		ft_bad_close(game);
 	}
-	if (game->grid[i][i + 1] != ' ')
+	if (game->grid[i][j + 1] != ' ')
 	{
 		fprintf(stderr, "Error\nBetween WE and the texture must be a space.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] <= 32)
+	while(game->grid[i][++j] <= 32)
 		;
-	if (!game->grid[i][i])
+	if (!game->grid[i][j])
 	{
-		fprintf(stderr, "Error\nThere is no a path for WE texture");
+		fprintf(stderr, "Error\nThere is no a path for WE texture.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
-	if (game->grid[i][i + 1] != 10)
+	while(game->grid[i][++j] > 32 && game->grid[i][j] < 127)
+		;
+	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path.\n");
 		ft_bad_close(game);
 	}
 }
 
-void	ft_check_e(t_map *game, int i)
+void	ft_check_e(t_map *game, int i, int j)
 {
 	if (game->grid[i][1] != 'A')
 	{
-		fprintf(stderr, "Error\nThe texture west must be EA");
+		fprintf(stderr, "Error\nThe texture west must be EA.\n");
 		ft_bad_close(game);
 	}
-	if (game->grid[i][i + 1] != ' ')
+	if (game->grid[i][j + 1] != ' ')
 	{
 		fprintf(stderr, "Error\nBetween EA and the texture must be a space.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] <= 32)
+	while(game->grid[i][++j] <= 32)
 		;
-	if (!game->grid[i][i])
+	if (!game->grid[i][j])
 	{
-		fprintf(stderr, "Error\nThere is no a path for EA texture");
+		fprintf(stderr, "Error\nThere is no a path for EA texture.\n");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] > 32 && game->grid[i][i] < 127)
-	if (game->grid[i][i + 1] != 10)
+	while(game->grid[i][++j] > 32 && game->grid[i][j] < 127)
+		;
+	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture space and the path");
+		fprintf(stderr, "Error\nOnly the name of the texture space and the path.\n");
 		ft_bad_close(game);
 	}
 }
 
-void	ft_check_f(t_map *game, int i)
+int	ft_check_num(t_map *game, int i, int aux,int j)
 {
-	int j;
-	
-	if (game->grid[i][i + 1] != ' ')
+	if (j - aux > 10)
 	{
-		fprintf(stderr, "Error\nBetween EA and the texture must be a space.\n");
+		fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include");
 		ft_bad_close(game);
 	}
-	while(game->grid[i][++i] <= 32)
+	aux = ft_atoi(ft_substr(game->grid[i], aux, j - 1));
+	if (aux > 255 || aux < 0)
+		return -1;
+	return 1;
+}
+
+void	ft_check_next(t_map *game, int i,int j)
+{
+	if (game->grid[i][j - 1] != 10 && game->grid[i][j - 1] != '\0')
+	{
+		fprintf(stderr, "Error\nThe texture of f and c is num,num,num and num must be between 0 and 255, both include");
+		ft_bad_close(game);
+	}
+}
+
+void	ft_check_f(t_map *game, int i, int j)
+{
+	int	aux;
+	int times;
+
+	aux = -1;
+	j = 0;
+	times = -1;
+	if (game->grid[i][j + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween F and the colour must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++j] <= 32)
 		;
-	j = i;
-	while (game->grid[i][j] >= '0' && game->grid[i][j] <= '9')
+	while (++times < 3)
+	{
+		aux = j;
+		while (game->grid[i][j] >= '0' && game->grid[i][j] <= '9')
 		++j;
+		if (ft_check_num(game, i, aux, j++) == -1)
+		{
+			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include.\n");
+			ft_bad_close(game);
+		}
+	}
+	ft_check_next(game, i, j);
 }
 
-void	ft_check_c(t_map *game, int i)
+void	ft_check_c(t_map *game, int i, int j)
 {
-	
+	int	aux;
+	int times;
+
+	aux = -1;
+	j = 0;
+	times = -1;
+	if (game->grid[i][j + 1] != ' ')
+	{
+		fprintf(stderr, "Error\nBetween C and the colour must be a space.\n");
+		ft_bad_close(game);
+	}
+	while(game->grid[i][++j] <= 32)
+		;
+	while (++times < 3)
+	{
+		aux = j;
+		while (game->grid[i][j] >= '0' && game->grid[i][j] <= '9')
+		++j;
+		if (ft_check_num(game, i, aux, j++) == -1)
+		{
+			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include");
+			ft_bad_close(game);
+		}
+	}
+	ft_check_next(game, i, j);
 }
 
 void	ft_check_elements_3(t_map *game)
 {
 	int		i;
+	int		j;
 
 	i = -1;
 	while (game->grid[++i])
@@ -321,18 +425,19 @@ void	ft_check_elements_3(t_map *game)
 			&& game->grid[i][0] != 'F' && game->grid[i][0] != 'C'
 			&& game->grid[i][0] != '\n')
 			break;
+		j = 1;
 		if (game->grid[i][0] == 'N')
-			ft_check_n(game, i);
+			ft_check_n(game, i, j);
 		if (game->grid[i][0] == 'S')
-			ft_check_s(game, i);
+			ft_check_s(game, i, j);
 		if (game->grid[i][0] == 'W')
-			ft_check_w(game, i);
+			ft_check_w(game, i, j);
 		if (game->grid[i][0] == 'E')
-			ft_check_e(game, i);
+			ft_check_e(game, i, j);
 		if (game->grid[i][0] == 'F')
-			ft_check_f(game, i);
+			ft_check_f(game, i, j);
 		if (game->grid[i][0] == 'C')
-			ft_check_c(game, i);
+			ft_check_c(game, i, j);
 	}
 }
 
