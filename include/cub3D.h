@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/01 19:01:59 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:22:55 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,13 @@ typedef struct s_elem
 	int c;
 	int f;
 }				t_elem;
+
+typedef struct s_start
+{
+	int	n;
+	int	s;
+	int	e;
+	int	w;
+}				t_start;
 
 #endif
