@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 17:38:58 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:25:17 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,7 @@ int	ft_check_num(t_map *game, int i, int aux,int j)
 		ft_bad_close(game);
 	}
 	aux = ft_atoi(temp);
+	printf("%i\n", aux);
 	if (aux > 255 || aux < 0)
 	{
 		free(temp);
@@ -405,8 +406,18 @@ void	ft_check_f(t_map *game, int i, int j)
 	while (++times < 3)
 	{
 		aux = j;
+		if (game->grid[i][j] > 9 || game->grid[i][j] < 0)
+		{
+			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include.\n");
+			ft_bad_close(game);
+		}
 		while (game->grid[i][j] >= '0' && game->grid[i][j] <= '9')
 		++j;
+		if (times < 2 && game->grid[i][j] != ',')
+		{
+			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include.\n");
+			ft_bad_close(game);
+		}
 		if (ft_check_num(game, i, aux, j++) == -1)
 		{
 			fprintf(stderr, "Error\nThe texture of f is num,num,num and num must be between 0 and 255, both include.\n");
@@ -649,10 +660,16 @@ int main(int argc, char **argv)
 {
 	t_map *game;
 	
-	game = malloc(sizeof(t_map));
-	if (argc != 2)
+	if (argc == 2)
+	{
+		game = malloc(sizeof(t_map));
+		ft_checks(game, argv);
+		ft_free_map(game);
+	}
+	else
+	{
 		fprintf(stderr, "Error\ncub3D needs a .cub map.\n");
-	ft_checks(game, argv);
-	ft_free_map(game);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
