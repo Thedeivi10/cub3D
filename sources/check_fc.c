@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:47:03 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 18:50:05 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:03:04 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_check_f(t_map *game, int i, int j)
 		if (ft_check_num(game, i, aux, j++) == -1)
 		{
 			fprintf(stderr, "Error\nThe texture of f is num,num,num and ");
-			fprinf(stderr, "num must be between 0 and 255, both include.\n");
+			fprintf(stderr, "num must be between 0 and 255, both include.\n");
 			ft_bad_close(game);
 		}
 	}

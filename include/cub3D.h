@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 14:59:28 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:00:52 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,31 @@
 
 # include <unistd.h>
 # include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
 # include <sys/time.h>
 
+# define TITRE "cub3D"
+# define WIDTH 640
+# define HEIGHT 480
+
+typedef struct s_images
+{
+	mlx_image_t	*no;
+	mlx_image_t	*so;
+	mlx_image_t	*ea;
+	mlx_image_t	*we;
+}				t_images;
+
 typedef struct s_map
 {
-	char	**grid;
-	int		height;
+	char		**grid;
+	int			height;
+	t_images	images;
+	mlx_t		*mlx;
 }				t_map;
 
 typedef struct s_elem
@@ -134,5 +149,9 @@ void	ft_check_start_2(t_map *game, int i, int j, t_start *start);
 //CHECKS_3.C
 /* Aux of floodfill */
 void	ft_aux_flood(char **cpy, int i, int j, t_map *game);
+
+//RUN.C
+void	ft_run(t_map *game);
+void	ft_init_mlx(t_map	*game);
 
 #endif

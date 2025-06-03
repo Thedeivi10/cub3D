@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:24:59 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 18:54:12 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:02:42 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_check_e(t_map *game, int i, int j)
 	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
 		fprintf(stderr, "Error\nOnly the name of the texture ");
-		fprinf(stderr, "space and the path.\n");
+		fprintf(stderr, "space and the path.\n");
 		ft_bad_close(game);
 	}
 }
