@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 13:49:28 by jotrujil         ###   ########.fr       */
+/*   Created: 2025/06/03 13:40:25 by jotrujil          #+#    #+#             */
+/*   Updated: 2025/06/03 14:08:14 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int	main(int argc, char **argv)
+int	execute(t_map *map)
 {
-	t_map	*game;
+	t_mlx	mlx;
 
-	if (argc == 2)
-	{
-		game = malloc(sizeof(t_map));
-		ft_checks(game, argv);
-		ft_free_map(game);
-		execute(game); //todo
-	}
-	else
-	{
-		fprintf(stderr, "Error\ncub3D needs a .cub map.\n");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	mlx.player = (t_player *)ft_calloc(sizeof(t_player), 1);
+	mlx.tex = (t_textures *)ft_calloc(sizeof(t_textures), 1);
+	mlx.mlx_pointer = mlx_init(SIZE_W, SIZE_H, "cub3D", false);
+	if (!mlx.mlx_pointer)
+		return(mlx_exit(&mlx), 0); //TODO: Create mlx_exit function to destroy all related to the MLX
 }

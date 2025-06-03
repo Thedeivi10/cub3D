@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
+/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:23:42 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:04:36 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 
 # include <unistd.h>
 # include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
 # include <sys/time.h>
 
+// MLX GAME MACROS
+
+# define SIZE_W 1920
+# define SIZE_H 1080
+
 typedef struct s_map
 {
 	char	**grid;
 	int		height;
-}				t_map;
+}			t_map;
 
 typedef struct s_elem
 {
@@ -35,7 +41,7 @@ typedef struct s_elem
 	int	w;
 	int	c;
 	int	f;
-}				t_elem;
+}		t_elem;
 
 typedef struct s_start
 {
@@ -44,6 +50,30 @@ typedef struct s_start
 	int	e;
 	int	w;
 }				t_start;
+
+typedef struct s_player
+{
+	int		player_x;
+	int		player_y;
+	double	p_angle;
+	int		p_rotation;
+	float	fov_radians;
+}			t_player;
+
+typedef struct s_textures
+{
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*ea;
+	mlx_texture_t	*we;
+}			t_textures;
+
+typedef struct s_mlx
+{
+	mlx_t		*mlx_pointer;
+	t_player	*player;
+	t_textures	*tex;
+}				t_mlx;
 
 //UTILS.C
 void	ft_bad_close(t_map *game);
