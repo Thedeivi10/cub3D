@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:42:36 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:05:23 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:21:01 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_check_next(t_map *game, int i, int j)
 {
 	if (game->grid[i][j - 1] != 10 && game->grid[i][j - 1] != '\0')
 	{
-		fprintf(stderr, "Error\nThe texture of f and c is num,num,num and\
-			num must be between 0 and 255, both include.\n");
+		fprintf(stderr, "Error\nThe texture of f and c is num,num,num and");
+		fprintf(stderr, "num must be between 0 and 255, both include.\n");
 		ft_bad_close(game);
 	}
 }

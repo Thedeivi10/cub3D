@@ -1,15 +1,15 @@
-NO ./sprites/beds.png
-WE ./sprites/campus.png
+NO ./sprites/beds.pngddd
+WE ./sprites/gay_en_la_horca.png
 SO ./sprites/cluster.png
 EA ./sprites/lobby.png
 
 F 100,100,0
-C 225,30,0
+C 225,1,0
 
-11111111
-100N001
-1011101
-101	101 	
-101 101
-11  111
+1111111
+1000001  1 
+1011101 1N1
+101	101  1
+1001 11
+11111
 
