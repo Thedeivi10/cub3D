@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:49:36 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:15:16 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:00:24 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_check_path(t_map *game, int i)
 		{
 			if (game->grid[i][j] == '0' || game->grid[i][j] == 'N'
 				|| game->grid[i][j] == 'S' || game->grid[i][j] == 'W'
-				|| game->grid[i][j] == 'S')
+				|| game->grid[i][j] == 'E')
 			{
 				cpy = ft_cpy_matrix(game->grid);
 				ft_flood_fill(cpy, i, j, game);

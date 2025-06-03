@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:06:27 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:02:48 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:00:36 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_read_map(t_map *game, char **argv)
 	game->grid = malloc(sizeof(char *) * (ft_count_lines(argv[1], game) + 1));
 	if (!game->grid)
 	{
-		fprintf(stderr, "Error\nCould not allocate memory for the gird.\n");
+		fprintf(stderr, "Error\nCould not allocate memory for the grid.\n");
 		ft_bad_close(game);
 	}
 	line = get_next_line(fd);
