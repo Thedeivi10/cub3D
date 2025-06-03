@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 14:04:36 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:26:09 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 
 typedef struct s_map
 {
-	char	**grid;
-	int		height;
+	char		**grid;
+	int			height;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_player	player;
+	t_input		input;
 }			t_map;
 
 typedef struct s_elem
@@ -51,29 +55,29 @@ typedef struct s_start
 	int	w;
 }				t_start;
 
+// Execute
+
 typedef struct s_player
 {
-	int		player_x;
-	int		player_y;
-	double	p_angle;
-	int		p_rotation;
-	float	fov_radians;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
 }			t_player;
 
-typedef struct s_textures
+typedef struct s_input
 {
-	mlx_texture_t	*no;
-	mlx_texture_t	*so;
-	mlx_texture_t	*ea;
-	mlx_texture_t	*we;
-}			t_textures;
-
-typedef struct s_mlx
-{
-	mlx_t		*mlx_pointer;
-	t_player	*player;
-	t_textures	*tex;
-}				t_mlx;
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_input;
 
 //UTILS.C
 void	ft_bad_close(t_map *game);
@@ -128,5 +132,10 @@ void	ft_check_start_2(t_map *game, int i, int j, t_start *start);
 
 //CHECKS_3.C
 void	ft_aux_flood(char **cpy, int i, int j, t_map *game);
+
+/* Executing */
+
+// input
+void	key_hook(mlx_key_data_t keydata, void *param);
 
 #endif
