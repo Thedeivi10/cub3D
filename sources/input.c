@@ -6,11 +6,20 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:40:25 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/03 21:29:42 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:34:50 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+void	rotate_player(t_player *p, double angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = p->dir_x;
+	old_plane_x = p->plane_x;
+}
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {

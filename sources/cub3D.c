@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:21:35 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/03 21:25:58 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:41:07 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 		game = malloc(sizeof(t_map));
 		ft_checks(game, argv);
 		ft_free_map(game);
-		mlx_key_hook(game->mlx, &key_hook, game);
 	}
 	else
 	{
