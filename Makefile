@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/02 21:35:07 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/03 21:19:32 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
 
 #TESTS
 
-VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/p.cub
+VALGRIND = valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/p.cub
 
 
 # Colores
@@ -45,6 +45,7 @@ SRC_FILES		= cub3D.c\
 					checks.c\
 					checks_2.c\
 					checks_3.c\
+					run.c\
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:24:59 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:00:52 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:02:42 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_check_n(t_map *game, int i, int j)
 		;
 	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture\
-			space and the path.\n");
+		fprintf(stderr, "Error\nOnly the name of the texture ");
+		fprintf(stderr, "space and the path.\n");
 		ft_bad_close(game);
 	}
 }
@@ -64,8 +64,8 @@ void	ft_check_s(t_map *game, int i, int j)
 		;
 	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture\
-			space and the path.\n");
+		fprintf(stderr, "Error\nOnly the name of the texture ");
+		fprintf(stderr, "space and the path.\n");
 		ft_bad_close(game);
 	}
 }
@@ -93,8 +93,8 @@ void	ft_check_w(t_map *game, int i, int j)
 		;
 	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture\
-			space and the path.\n");
+		fprintf(stderr, "Error\nOnly the name of the texture ");
+		fprintf(stderr, "space and the path.\n");
 		ft_bad_close(game);
 	}
 }
@@ -122,8 +122,8 @@ void	ft_check_e(t_map *game, int i, int j)
 		;
 	if (game->grid[i][j] != 10 && game->grid[i][j] != '\0')
 	{
-		fprintf(stderr, "Error\nOnly the name of the texture\
-			space and the path.\n");
+		fprintf(stderr, "Error\nOnly the name of the texture ");
+		fprintf(stderr, "space and the path.\n");
 		ft_bad_close(game);
 	}
 }

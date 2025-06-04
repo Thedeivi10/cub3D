@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:49:36 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:15:16 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:21:59 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	ft_check_start(t_map *game, int i)
 		|| (start->e == 0 && start->n == 0 && start->s == 1 && start->w == 0)
 		|| (start->e == 0 && start->n == 1 && start->s == 0 && start->w == 0)
 		|| (start->e == 1 && start->n == 0 && start->s == 0 && start->w == 0))
+	{
+		free(start);
 		return ;
+	}
 	fprintf(stderr, "Error\nOnly one start point.\n");
 	free(start);
 	ft_bad_close(game);
@@ -69,7 +72,7 @@ void	ft_check_path(t_map *game, int i)
 		{
 			if (game->grid[i][j] == '0' || game->grid[i][j] == 'N'
 				|| game->grid[i][j] == 'S' || game->grid[i][j] == 'W'
-				|| game->grid[i][j] == 'S')
+				|| game->grid[i][j] == 'E')
 			{
 				cpy = ft_cpy_matrix(game->grid);
 				ft_flood_fill(cpy, i, j, game);
