@@ -6,7 +6,7 @@
 #    By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/04 12:14:37 by jotrujil         ###   ########.fr        #
+#    Updated: 2025/06/04 14:56:18 by jotrujil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES		= cub3D.c\
 					checks_3.c\
 					run.c\
 					input.c\
+					render.c\
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
