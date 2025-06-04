@@ -2,6 +2,7 @@
 *.pdf
 *.md
 .vscode
+*.o
 #*
 #!ex*
 #!ex*/*.cpp
