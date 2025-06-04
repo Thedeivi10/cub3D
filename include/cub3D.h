@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 14:55:35 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:05:59 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,14 @@ typedef struct s_start
 	int	e;
 	int	w;
 }				t_start;
+
+typedef struct s_line
+{
+	int			x;
+	int			y_start;
+	int			y_end;
+	uint32_t	color;
+}				t_line;
 
 //UTILS.C
 /* When somenthing is wrong, free game and return failure */
