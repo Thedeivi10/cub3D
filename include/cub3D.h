@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 11:36:28 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:06:02 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ typedef struct s_map
 {
 	char			**grid;
 	int				height;
-	t_images	images;
-	mlx_t		*mlx;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_player	player;
-	t_input		input;
+	t_images		images;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_player		player;
+	t_input			input;
 }			t_map;
 
 typedef struct s_elem
@@ -184,7 +183,12 @@ void	ft_init_mlx(t_map	*game);
 
 /* Executing */
 
-// input
+// INPUT.C
+/* Manage the keyboard inputs */
 void	key_hook(mlx_key_data_t keydata, void *param);
+/* Update the player position on the map, and the orientation of the camera */
+void	update_game(void *param);
+/* Performs the math calcs to rotate the dir vector, and the plane rotation */
+void	rotate_player(t_player *p, double angle);
 
 #endif
