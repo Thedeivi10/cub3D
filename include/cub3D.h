@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 12:06:02 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:15:48 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,28 @@
 # define TITRE "cub3D"
 # define WIDTH 640
 # define HEIGHT 480
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
+}			t_player;
+
+typedef struct s_input
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_input;
 
 typedef struct s_images
 {
@@ -62,30 +84,6 @@ typedef struct s_start
 	int	e;
 	int	w;
 }				t_start;
-
-// Execute
-
-typedef struct s_player
-{
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	move_speed;
-	double	rot_speed;
-}			t_player;
-
-typedef struct s_input
-{
-	bool	w;
-	bool	s;
-	bool	a;
-	bool	d;
-	bool	left;
-	bool	right;
-}			t_input;
 
 //UTILS.C
 /* When somenthing is wrong, free game and return failure */

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
+#    By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/03 21:19:32 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/04 12:14:37 by jotrujil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES		= cub3D.c\
 					checks_2.c\
 					checks_3.c\
 					run.c\
+					input.c\
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
