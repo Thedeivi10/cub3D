@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:40:25 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/04 12:04:05 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:20:11 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	rotate_player(t_player *p, double angle)
 	p->plane_y = old_plane_x * sin(angle) + p->plane_x * cos(angle);
 }
 
-void	update_game(void *param)
+void	handle_input(void *param)
 {
 	t_map	*game;
 	double	new_x;
@@ -63,7 +63,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_S)
 		game->input.s = (keydata.action != MLX_RELEASE);
 	if (keydata.key == MLX_KEY_A)
-		game->input.d = (keydata.action != MLX_RELEASE);
+		game->input.a = (keydata.action != MLX_RELEASE);
 	if (keydata.key == MLX_KEY_D)
 		game->input.d = (keydata.action != MLX_RELEASE);
 	if (keydata.key == MLX_KEY_LEFT)

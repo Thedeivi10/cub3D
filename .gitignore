@@ -3,6 +3,8 @@
 *.md
 .vscode
 *.o
+cub3D
+.gitignore
 #*
 #!ex*
 #!ex*/*.cpp

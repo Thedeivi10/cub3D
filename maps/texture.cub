@@ -4,7 +4,7 @@ SO ./sprites/cluster.png
 EA ./sprites/lobby.png
 
 F 100,100,0
-C 225,1,0
+C 225,1, 255
 
 1111111
 1000001  1 

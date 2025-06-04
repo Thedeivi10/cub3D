@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 13:26:22 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:26:26 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void	ft_init_mlx(t_map	*game);
 /* Manage the keyboard inputs */
 void	key_hook(mlx_key_data_t keydata, void *param);
 /* Update the player position on the map, and the orientation of the camera */
-void	update_game(void *param);
+void	handle_input(void *param);
 /* Performs the math calcs to rotate the dir vector, and the plane rotation */
 void	rotate_player(t_player *p, double angle);
 
