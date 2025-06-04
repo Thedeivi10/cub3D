@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 12:15:48 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:26:22 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ typedef struct s_map
 	mlx_image_t		*img;
 	t_player		player;
 	t_input			input;
+	uint8_t			floor_r;
+	uint8_t			floor_g;
+	uint8_t			floor_b;
+	uint8_t			ceiling_r;
+	uint8_t			ceiling_g;
+	uint8_t			ceiling_b;
 }			t_map;
 
 typedef struct s_elem
