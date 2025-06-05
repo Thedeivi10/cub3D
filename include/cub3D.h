@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 14:55:35 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:39:58 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,34 @@
 # include <sys/time.h>
 
 # define TITLE "cub3D"
-# define WIDTH 640
-# define HEIGHT 480
+# define WIDTH 1024
+# define HEIGHT 768
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+
+	int		map_x;
+	int		map_y;
+
+	double	side_dist_x;
+	double	side_dist_y;
+	
+	double	delta_dist_x;
+	double	delta_dist_y;
+
+	int		step_x;
+	int		step_y;
+
+	int		side;
+
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}			t_ray;
 
 typedef struct s_player
 {
@@ -181,11 +207,21 @@ void	ft_check_start_2(t_map *game, int i, int j, t_start *start);
 /* Aux of floodfill */
 void	ft_aux_flood(char **cpy, int i, int j, t_map *game);
 
+/* Executing */
+
 //RUN.C
 void	ft_run(t_map *game);
 void	ft_init_mlx(t_map	*game);
 
-/* Executing */
+//TECTURES.C
+char	*ft_search_texture(t_map *game, char c);
+void	ft_load_textures(t_map *game);
+void	ft_load_textures_2(t_map *game, mlx_texture_t *texture);
+void	ft_load_textures_3(t_map *game, mlx_texture_t *texture);
+void	ft_load_textures_4(t_map *game, mlx_texture_t *texture);
+
+//RAYCASTING.C
+void	raycast_all_columns(t_map *game);
 
 // INPUT.C
 /* Manage the keyboard inputs */

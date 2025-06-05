@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+         #
+#    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/04 14:56:18 by jotrujil         ###   ########.fr        #
+#    Updated: 2025/06/04 22:40:18 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
 
 #TESTS
 
-VALGRIND = valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/p.cub
+VALGRIND = valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/texture.cub
 
 
 # Colores
@@ -48,6 +48,9 @@ SRC_FILES		= cub3D.c\
 					run.c\
 					input.c\
 					render.c\
+					textures.c\
+					raycasting.c\
+					
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
