@@ -1,0 +1,40 @@
+SRC =	collision.c \
+		hooks.c \
+		main.c \
+		map_mock.c \
+		minimap.c \
+		mlx.c \
+		movement.c \
+		ray.c \
+		scene.c \
+		texture.c \
+		vector.c
+OBJ = $(SRC:.c=.o)
+CC = gcc
+RM = rm -f
+CFLAGS = -I$(MLX42)/include -Wall -Wextra -Werror
+
+NAME = cub3d
+
+MLX42 = ./MLX42
+libmlx42 = $(MLX42)/libmlx42.a
+
+LINK_OPTIONS = -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+
+all: $(NAME)
+
+$(libmlx42):
+		make -C $(MLX42)
+
+$(NAME):	$(OBJ) $(libmlx42)
+		$(CC) $(OBJ) $(libmlx42) $(CFLAGS) -o $(NAME) $(LINK_OPTIONS)
+
+clean:
+		$(RM) $(OBJ)
+
+fclean:		clean
+		$(RM) $(NAME)
+
+re:			fclean all
+
+.PHONY:		all clean fclean re

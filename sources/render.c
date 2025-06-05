@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:16:51 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/05 08:47:03 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:32:51 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void	update_game(void *param)
 	game = (t_map *)param;
 	handle_input(game);
 	draw_background(game);
+	raycast_all_columns(game);
 }
