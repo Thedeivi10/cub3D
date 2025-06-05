@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/04 22:39:58 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/05 21:20:22 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,7 @@
 
 typedef struct s_ray
 {
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-
-	int		map_x;
-	int		map_y;
-
-	double	side_dist_x;
-	double	side_dist_y;
 	
-	double	delta_dist_x;
-	double	delta_dist_y;
-
-	int		step_x;
-	int		step_y;
-
-	int		side;
-
-	double	perp_wall_dist;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
 }			t_ray;
 
 typedef struct s_player
