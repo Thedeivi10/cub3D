@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:16:51 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/04 14:33:18 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/07 13:31:09 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,33 @@ void	draw_background(t_map *game)
 		}
 		y++;
 	}
+}
+
+void	draw_vertical_line(mlx_image_t *img, t_line line)
+{
+	int	y;
+
+	if (!img)
+		return ;
+	y = line.y_start;
+	while (y <= line.y_end)
+	{
+		if (y >= 0 && y < (int)img->height && line.x >= 0
+			&& line.x < (int)img->width)
+			mlx_put_pixel(img, line.x, y, line.color);
+		y++;
+	}
+}
+
+void	draw_column(t_map *game, int x, int start, int end)
+{
+	t_line	line;
+
+	line.x = x;
+	line.y_start = start;
+	line.y_end = end;
+	line.color = 0xFFFFFFFF;
+	draw_vertical_line(game->img, line);
 }
 
 void	update_game(void *param)
