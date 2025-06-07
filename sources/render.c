@@ -6,7 +6,7 @@
 /*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:16:51 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/04 17:20:04 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/07 13:31:09 by jotrujil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ void	draw_vertical_line(mlx_image_t *img, t_line line)
 			mlx_put_pixel(img, line.x, y, line.color);
 		y++;
 	}
+}
+
+void	draw_column(t_map *game, int x, int start, int end)
+{
+	t_line	line;
+
+	line.x = x;
+	line.y_start = start;
+	line.y_end = end;
+	line.color = 0xFFFFFFFF;
+	draw_vertical_line(game->img, line);
 }
 
 void	update_game(void *param)
