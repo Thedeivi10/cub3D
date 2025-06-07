@@ -6,11 +6,11 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/05 21:04:54 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/07 13:08:13 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= cub3D
+NAME		= collisions
 
 CC			= gcc
 CFLAGS		= 
@@ -35,7 +35,9 @@ SRC_DIR			= ./sources
 
 OBJ_DIR			= ./obj
 
-SRC_FILES		= main.c
+SRC_FILES		= collision.c  main.c      minimap.c  movement.c  scene.c\
+hooks.c      map_mock.c  mlx.c      ray.c       vector.c
+
 					
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -46,7 +48,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME): $(LIBFT)/libft.a $(MLX42)/build/libmlx42.a $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-	@echo "$(GREEN)Executable for cub3D launched successfully!$(RESET)"
+	@echo "$(GREEN)Executable for collisions launched successfully!$(RESET)"
 
 $(LIBFT)/libft.a:
 	@$(MAKE) -C $(LIBFT)

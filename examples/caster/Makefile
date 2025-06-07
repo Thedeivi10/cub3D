@@ -6,11 +6,11 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/05 20:55:28 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/07 13:02:17 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= cub3D
+NAME		= caster
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -g
@@ -35,8 +35,7 @@ SRC_DIR			= ./sources
 
 OBJ_DIR			= ./obj
 
-SRC_FILES		= caster.c\
-					draw_grid.c main.c 
+SRC_FILES		= caster.c draw_grid.c main.c
 					
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -47,7 +46,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME): $(LIBFT)/libft.a $(MLX42)/build/libmlx42.a $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-	@echo "$(GREEN)Executable for cub3D launched successfully!$(RESET)"
+	@echo "$(GREEN)Executable for caster launched successfully!$(RESET)"
 
 $(LIBFT)/libft.a:
 	@$(MAKE) -C $(LIBFT)

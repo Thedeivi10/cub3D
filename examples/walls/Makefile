@@ -1,30 +1,77 @@
-SRC = main.c draw_grid.c caster.c map_mock.c draw_map.c draw_scene.c
-OBJ = $(SRC:.c=.o)
-CC = gcc
-RM = rm -f
-CFLAGS = -I$(MLX42)/include #-Wall -Wextra -Werror -g
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
+#    Updated: 2025/06/07 13:28:39 by davigome         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = walls
+NAME		= walls
 
-MLX42 = ../../MLX42
-libmlx42 = $(MLX42)/libmlx42.a
+CC			= gcc
+CFLAGS		= 
+MLX42		= ./MLX42
+LIBFT		= ./libft
+INCLUDES	= -I$(MLX42)/include -I$(LIBFT)/include -I ./include
+LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
 
-LINK_OPTIONS = -ldl -lglfw -pthread -lm
+#TESTS
 
-all: $(NAME)
+VALGRIND = valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/texture.cub
 
-$(libmlx42):
-		make -C $(MLX42)
 
-$(NAME):	$(OBJ) $(libmlx42)
-		$(CC) $(OBJ) $(libmlx42) $(CFLAGS) -o $(NAME) $(LINK_OPTIONS)
+# Colores
+RED = \033[31m
+GREEN = \033[32m
+YELLOW = \033[33m
+BLUE = \033[34m
+RESET = \033[0m
+
+SRC_DIR			= ./sources
+
+OBJ_DIR			= ./obj
+
+SRC_FILES		= caster.c draw_grid.c  draw_scene.c  map_mock.c collision_detector.c  draw_map.c   main.c
+
+					
+
+OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(NAME): $(LIBFT)/libft.a $(MLX42)/build/libmlx42.a $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@echo "$(GREEN)Executable for walls launched successfully!$(RESET)"
+
+$(LIBFT)/libft.a:
+	@$(MAKE) -C $(LIBFT)
+
+$(MLX42)/build/libmlx42.a:
+	@echo "$(YELLOW)Building MLX42 library...$(RESET)"
+	@cmake -S $(MLX42) -B $(MLX42)/build
+	@cmake --build $(MLX42)/build -j4
+	@echo "$(GREEN)MLX42 library built successfully!$(RESET)"
+
+all:$(NAME)
+
+valgrind:
+	$(VALGRIND)
 
 clean:
-		$(RM) $(OBJ)
+	@$(MAKE) -C $(LIBFT) clean
+	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(MLX42)/build
 
-fclean:		clean
-		$(RM) $(NAME)
+fclean: clean
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(LIBFT) fclean
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
