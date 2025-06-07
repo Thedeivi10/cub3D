@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/05 21:20:22 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:05:01 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@
 
 typedef struct s_ray
 {
+	double	camerax;	//x coordinate of the screen [-1,1]
+	double	raydirx;	//
+	double	raydiry;
+
+	int		mapx;
+	int		mapy;
+
+	double	sidedistx;
+	double	sidedisty;
+	
+	double	deltadistx;
+	double	deltadisty;
+
+	double	perpwalldist;
+	
+	double	stepx;
+	double	stepy;
+	int		hit;
 	
 }			t_ray;
 
