@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 11:58:11 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:28:35 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,13 @@ void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 	}
 	uint32_t color = 0xFFFFFFFF;
 	if (texture == game->images.no)
-		color = 0xFF0000FF;
+		color = 0xFF0000FF; //Rojo
 	else if (texture == game->images.so)
-		color = 0x00FF00FF;
+		color = 0x00FF00FF; //verde
 	else if (texture == game->images.ea)
-		color = 0x0000FFFF;
+		color = 0x0000FFFF; // azul
 	else if (texture == game->images.we)
-		color = 0xFFFF00FF;
+		color = 0xFFFF00FF; // amarillo
 	line.x = x;
 	line.y_start = ray->drawstart;
 	line.y_end = ray->drawend;
