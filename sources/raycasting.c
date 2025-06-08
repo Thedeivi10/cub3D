@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 10:38:28 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:58:11 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	perform_dda(t_map *game, t_ray *ray)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if (game->grid[ray->mapx][ray->mapy] != '0')
+		if (game->grid[ray->mapy][ray->mapx] != '0')
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -104,6 +104,7 @@ void	calculate_projection(t_ray	*ray)
 void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 {
 	mlx_image_t *texture;
+	t_line line;
 
 	if (ray->side == 0)
 	{
@@ -119,19 +120,15 @@ void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 		else
 			texture = game->images.so;
 	}
-
-	// Por ahora pintamos una línea plana como antes (color según textura para test)
 	uint32_t color = 0xFFFFFFFF;
 	if (texture == game->images.no)
-		color = 0xFF0000FF; // rojo para norte
+		color = 0xFF0000FF;
 	else if (texture == game->images.so)
-		color = 0x00FF00FF; // verde para sur
+		color = 0x00FF00FF;
 	else if (texture == game->images.ea)
-		color = 0x0000FFFF; // azul para este
+		color = 0x0000FFFF;
 	else if (texture == game->images.we)
-		color = 0xFFFF00FF; // amarillo para oeste
-
-	t_line line;
+		color = 0xFFFF00FF;
 	line.x = x;
 	line.y_start = ray->drawstart;
 	line.y_end = ray->drawend;
