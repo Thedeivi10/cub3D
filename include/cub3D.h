@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 08:38:36 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:12:32 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ typedef struct s_ray
 
 	double	perpwalldist;
 	
-	double	stepx;
-	double	stepy;
+	int		stepx;
+	int		stepy;
 	int		hit;
 
 	int		side;
 	
+	int		drawstart;
+	int		drawend;
+	int		lineheight
 }			t_ray;
 
 typedef struct s_player

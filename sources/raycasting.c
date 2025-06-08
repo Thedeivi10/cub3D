@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 08:42:25 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:12:40 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	init_ray(t_map *game, t_ray *ray, int x)
 	ray->camerax = 2 * x / WIDTH - 1;
 	ray->raydirx = game->player.dir_x + game->player.plane_x * ray->camerax;
 	ray->raydiry = game->player.dir_y + game->player.plane_y * ray->camerax;
+	ray->mapx = (int)game->player.x;
+	ray->mapy = (int)game->player.y;
 	if (ray->raydirx == 0)
     	ray->deltadistx = 1e30;
 	else 
     	ray->deltadistx = 1 / ray->raydirx;
-    if (ray->deltadistx < 0)
-        ray->deltadistx = -ray->deltadistx;
+	if (ray->deltadistx < 0)
+		ray->deltadistx = -ray->deltadistx;
 	if (ray->raydiry == 0)
-    	ray->deltadisty = 1e30;
+		ray->deltadisty = 1e30;
 	else 
     	ray->deltadisty = 1 / ray->raydiry;
     if (ray->deltadisty < 0)
@@ -69,11 +71,34 @@ void	perform_dda(t_map *game, t_ray *ray)
 		else
 		{
 			ray->sidedisty += ray->deltadisty;
-			ray->mapy = ray->stepy;
+			ray->mapy += ray->stepy;
+			ray->side = 1;
 		}
 		if (game->grid[ray->mapx][ray->mapy] > 0)
 			ray->hit = 1;
 	}
+	if (ray->side == 0)
+		ray->perpwalldist = (ray->sidedistx - ray->deltadistx);
+	else
+		ray->perpwalldist = (ray->sidedisty - ray->deltadisty);
+}
+
+void	calculate_projection(t_map *game, t_ray	*ray)
+{
+	int	lineheight;
+	int	drawstart;
+	int	drawend;
+
+	lineheight = (int)(HEIGHT / ray->perpwalldist);
+	drawstart = -lineheight / 2 + HEIGHT / 2;
+	if (drawstart < 0)
+		drawstart = 0;
+	drawend = lineheight / 2 + HEIGHT / 2;
+	if (drawend >= HEIGHT)
+		drawend = HEIGHT - 1;
+	ray->drawstart = drawstart;
+	ray->drawend = drawend;
+	ray->lineheight = lineheight;
 }
 
 void	raycast_all_columns(t_map *game)
