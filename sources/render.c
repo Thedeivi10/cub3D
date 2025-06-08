@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:16:51 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/07 13:47:08 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:39:42 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,33 @@ void	draw_background(t_map *game)
 	}
 }
 
+void	draw_vertical_line(mlx_image_t *img, t_line line)
+{
+	int	y;
+
+	if (!img)
+		return ;
+	y = line.y_start;
+	while (y <= line.y_end)
+	{
+		if (y >= 0 && y < (int)img->height && line.x >= 0
+			&& line.x < (int)img->width)
+			mlx_put_pixel(img, line.x, y, line.color);
+		y++;
+	}
+}
+
+void	draw_column(t_map *game, int x, int start, int end)
+{
+	t_line	line;
+
+	line.x = x;
+	line.y_start = start;
+	line.y_end = end;
+	line.color = 0xFFFFFFFF;
+	draw_vertical_line(game->img, line);
+}
+
 void	update_game(void *param)
 {
 	t_map	*game;
@@ -46,5 +73,5 @@ void	update_game(void *param)
 	game = (t_map *)param;
 	handle_input(game);
 	draw_background(game);
-//	raycast_all_columns(game);
+	raycast_all_columns(game);
 }

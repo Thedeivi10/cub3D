@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 09:12:32 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:37:55 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_ray
 	
 	int		drawstart;
 	int		drawend;
-	int		lineheight
+	int		lineheight;
 }			t_ray;
 
 typedef struct s_player
@@ -118,6 +118,14 @@ typedef struct s_start
 	int	e;
 	int	w;
 }				t_start;
+
+typedef struct s_line
+{
+	int			x;
+	int			y_start;
+	int			y_end;
+	uint32_t	color;
+}				t_line;
 
 //UTILS.C
 /* When somenthing is wrong, free game and return failure */
@@ -231,9 +239,10 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 /* Update the player position on the map, and the orientation of the camera */
 void	handle_input(void *param);
 /* Performs the math calcs to rotate the dir vector, and the plane rotation */
-void	rotate_player(t_player *p, double angle);
+void	rotate_player(t_player *p, int dir);
 
 // RENDER.C
+void	draw_vertical_line(mlx_image_t *img, t_line line);
 void	update_game(void *param);
 
 #endif

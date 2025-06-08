@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/04 22:40:18 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/08 09:26:48 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES		= cub3D.c\
 					checks_3.c\
 					run.c\
 					input.c\
+					input2.c\
 					render.c\
 					textures.c\
 					raycasting.c\
