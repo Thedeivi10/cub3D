@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 12:28:35 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 22:13:04 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_ray(t_map *game, t_ray *ray, int x)
 {
 	ray->hit = 0;
-	ray->camerax = 2 * x / WIDTH - 1;
+	ray->camerax = 2.0 * x / (double)WIDTH - 1.0;
 	ray->raydirx = game->player.dir_x + game->player.plane_x * ray->camerax;
 	ray->raydiry = game->player.dir_y + game->player.plane_y * ray->camerax;
 	ray->mapx = (int)game->player.x;
@@ -74,7 +74,7 @@ void	perform_dda(t_map *game, t_ray *ray)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if (game->grid[ray->mapy][ray->mapx] != '0')
+		if (game->grid[ray->mapy][ray->mapx] == '1')
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -109,16 +109,16 @@ void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 	if (ray->side == 0)
 	{
 		if (ray->raydirx > 0)
-			texture = game->images.we;
-		else
 			texture = game->images.ea;
+		else
+			texture = game->images.we;
 	}
 	else
 	{
 		if (ray->raydiry > 0)
-			texture = game->images.no;
-		else
 			texture = game->images.so;
+		else
+			texture = game->images.no;
 	}
 	uint32_t color = 0xFFFFFFFF;
 	if (texture == game->images.no)

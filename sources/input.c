@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:40:25 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/08 12:58:46 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:48:49 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	handle_input(void *param)
 	if (game->input.d)
 		move_right(game, speed);
 	if (game->input.right)
-		rotate_player(&game->player, -game->player.rot_speed);
+		rotate_player(&game->player, +game->player.rot_speed);
 	if (game->input.left)
-		rotate_player(&game->player, game->player.rot_speed);
+		rotate_player(&game->player, -game->player.rot_speed);
 }

@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 11:45:56 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:28:36 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 /* Update the player position on the map, and the orientation of the camera */
 void	handle_input(void *param);
 /* Performs the math calcs to rotate the dir vector, and the plane rotation */
-void	rotate_player(t_player *p, int dir);
+void	rotate_player(t_player *p, double dir);
 
 // RENDER.C
 void	draw_vertical_line(mlx_image_t *img, t_line line);

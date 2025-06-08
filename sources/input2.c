@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:33:32 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/07 13:37:02 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:28:20 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	rotate_player(t_player *p, int dir)
+void	rotate_player(t_player *p, double dir)
 {
 	double	old_dir_x;
 	double	old_plane_x;
