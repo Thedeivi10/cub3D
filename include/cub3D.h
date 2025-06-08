@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/07 19:05:01 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:38:36 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_ray
 	double	stepx;
 	double	stepy;
 	int		hit;
+
+	int		side;
 	
 }			t_ray;
 

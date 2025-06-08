@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/07 19:31:20 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:42:25 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,26 @@ void	calculate_steps_and_sidedist(t_map *game, t_ray *ray)
 	{
 		ray->stepy = 1;
 		ray->sidedisty = (ray->mapy + 1 - game->player.y) * ray->deltadisty;
+	}
+}
+
+void	perform_dda(t_map *game, t_ray *ray)
+{
+	while(ray->hit == 0)
+	{
+		if(ray->sidedistx < ray->sidedisty)
+		{
+			ray->sidedistx += ray->deltadistx;
+			ray->mapx += ray->stepx;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->sidedisty += ray->deltadisty;
+			ray->mapy = ray->stepy;
+		}
+		if (game->grid[ray->mapx][ray->mapy] > 0)
+			ray->hit = 1;
 	}
 }
 
