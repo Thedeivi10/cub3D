@@ -3,8 +3,8 @@ WE ./sprites/campus.png
 SO ./sprites/cluster.png
 EA ./sprites/lobby.png
 
-F 161,87,18
-C 5,238,246
+F 171,181,187
+C 50,50,52
 
 1111111
 100S001
