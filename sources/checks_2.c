@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:52:45 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/02 21:12:33 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:35:38 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_invalid_char(t_map *game, int i)
 				&& game->grid[i][j] != 'E' && game->grid[i][j] != 'W'
 				&& game->grid[i][j] > 32)
 			{
-				fprintf(stderr, "Error\nOnly valid characthers in the map.\n");
+				fprintf(stderr, "Error\nOnly valid characters in the map.\n");
 				ft_bad_close(game);
 			}
 		}

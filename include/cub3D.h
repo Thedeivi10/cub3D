@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:30 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/07 13:39:03 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:07:04 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,48 @@
 # include <sys/time.h>
 
 # define TITLE "cub3D"
-# define WIDTH 640
-# define HEIGHT 480
+# define WIDTH 1920
+# define HEIGHT 1080
+# define COLLISION_MARGIN 0.2
+
+typedef struct s_ray
+{
+	double	camerax;	//x coordinate of the screen [-1,1]
+	double	raydirx;
+	double	raydiry;
+
+	int		mapx;
+	int		mapy;
+
+	double	sidedistx;
+	double	sidedisty;
+
+	double	deltadistx;
+	double	deltadisty;
+
+	double	perpwalldist;
+
+	int		stepx;
+	int		stepy;
+	int		hit;
+
+	int		side;
+
+	int		drawstart;
+	int		drawend;
+	int		lineheight;
+}			t_ray;
+
+typedef struct s_ray_aux
+{
+	mlx_image_t	*texture;
+	double		wall_x;
+	uint32_t	color;
+	int			y;
+	int			d;
+	int			tex_y;
+	int			tex_x;
+}			t_ray_aux;
 
 typedef struct s_player
 {
@@ -189,11 +229,25 @@ void	ft_check_start_2(t_map *game, int i, int j, t_start *start);
 /* Aux of floodfill */
 void	ft_aux_flood(char **cpy, int i, int j, t_map *game);
 
+/* Executing */
+
 //RUN.C
 void	ft_run(t_map *game);
 void	ft_init_mlx(t_map	*game);
+void	key_hook(mlx_key_data_t keydata, void *param);
 
-/* Executing */
+//TECTURES.C
+char	*ft_search_texture(t_map *game, char c);
+void	ft_load_textures(t_map *game);
+void	ft_load_textures_2(t_map *game, mlx_texture_t *texture);
+void	ft_load_textures_3(t_map *game, mlx_texture_t *texture);
+void	ft_load_textures_4(t_map *game, mlx_texture_t *texture);
+
+//RAYCASTING.C
+void	raycast_all_columns(t_map *game);
+void	init_ray(t_map *game, t_ray *ray, int x);
+void	calculate_steps_and_sidedist(t_map *game, t_ray *ray);
+void	perform_dda(t_map *game, t_ray *ray);
 
 // INPUT.C
 /* Manage the keyboard inputs */
@@ -201,9 +255,11 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 /* Update the player position on the map, and the orientation of the camera */
 void	handle_input(void *param);
 /* Performs the math calcs to rotate the dir vector, and the plane rotation */
-void	rotate_player(t_player *p, int dir);
+void	rotate_player(t_player *p, double dir);
+int		is_wall(t_map *game, double x, double y);
 
 // RENDER.C
+void	draw_vertical_line(mlx_image_t *img, t_line line);
 void	update_game(void *param);
 
 #endif

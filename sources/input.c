@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:40:25 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/07 12:52:04 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:44:14 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	move_forward(t_map *game, double speed)
 
 	new_x = game->player.x + game->player.dir_x * speed;
 	new_y = game->player.y + game->player.dir_y * speed;
-	if (game->grid[(int)new_y][(int)game->player.x] != '1')
+	if (!is_wall(game, game->player.x, new_y))
 		game->player.y = new_y;
-	if (game->grid[(int)game->player.y][(int)new_x] != '1')
+	if (!is_wall(game, new_x, game->player.y))
 		game->player.x = new_x;
 }
 
@@ -32,9 +32,9 @@ static void	move_left(t_map *game, double speed)
 
 	new_x = game->player.x - game->player.plane_x * speed;
 	new_y = game->player.y - game->player.plane_y * speed;
-	if (game->grid[(int)new_y][(int)game->player.x] != '1')
+	if (!is_wall(game, game->player.x, new_y))
 		game->player.y = new_y;
-	if (game->grid[(int)game->player.y][(int)new_x] != '1')
+	if (!is_wall(game, new_x, game->player.y))
 		game->player.x = new_x;
 }
 
@@ -45,9 +45,9 @@ static void	move_backward(t_map *game, double speed)
 
 	new_x = game->player.x - game->player.dir_x * speed;
 	new_y = game->player.y - game->player.dir_y * speed;
-	if (game->grid[(int)new_y][(int)game->player.x] != '1')
+	if (!is_wall(game, game->player.x, new_y))
 		game->player.y = new_y;
-	if (game->grid[(int)game->player.y][(int)new_x] != '1')
+	if (!is_wall(game, new_x, game->player.y))
 		game->player.x = new_x;
 }
 
@@ -58,9 +58,9 @@ static void	move_right(t_map *game, double speed)
 
 	new_x = game->player.x + game->player.plane_x * speed;
 	new_y = game->player.y + game->player.plane_y * speed;
-	if (game->grid[(int)new_y][(int)game->player.x] != '1')
+	if (!is_wall(game, game->player.x, new_y))
 		game->player.y = new_y;
-	if (game->grid[(int)game->player.y][(int)new_x] != '1')
+	if (!is_wall(game, new_x, game->player.y))
 		game->player.x = new_x;
 }
 
@@ -80,7 +80,7 @@ void	handle_input(void *param)
 	if (game->input.d)
 		move_right(game, speed);
 	if (game->input.right)
-		rotate_player(&game->player, -game->player.rot_speed);
+		rotate_player(&game->player, +game->player.rot_speed);
 	if (game->input.left)
-		rotate_player(&game->player, game->player.rot_speed);
+		rotate_player(&game->player, -game->player.rot_speed);
 }

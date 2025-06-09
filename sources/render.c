@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotrujil <jotrujil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:16:51 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/07 13:31:09 by jotrujil         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:14:11 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void	update_game(void *param)
 	game = (t_map *)param;
 	handle_input(game);
 	draw_background(game);
+	raycast_all_columns(game);
 }

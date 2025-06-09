@@ -1,15 +1,15 @@
-NO ./path_to_the_north_texture
-WE ./patvalh_to_the_west_texture
-SO ./path_to_the_south_texture
-EA ./path_to_the_east_texture
+NO ./sprites/beds.png
+WE ./sprites/campus.png
+SO ./sprites/cluster.png
+EA ./sprites/lobby.png
+
 
 F 100,100,0
 C 225,30,0
 
 11111111
-100N001
+100W001
 1011101
-101	101 	
-101 101
-11  111
-
+101101 	
+1010101
+1111111
