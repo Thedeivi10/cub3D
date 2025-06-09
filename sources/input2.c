@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:33:32 by jotrujil          #+#    #+#             */
-/*   Updated: 2025/06/08 20:28:20 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:34:12 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,19 @@ void	rotate_player(t_player *p, double dir)
 	p->dir_y = old_dir_x * sin(angle) + p->dir_y * cos(angle);
 	p->plane_x = p->plane_x * cos(angle) - p->plane_y * sin(angle);
 	p->plane_y = old_plane_x * sin(angle) + p->plane_y * cos(angle);
+}
+
+int	is_wall(t_map *game, double x, double y)
+{
+	return (
+		game->grid[(int)(y)][(int)(x)] == '1' ||
+		game->grid[(int)(y + COLLISION_MARGIN)][(int)(x)] == '1' ||
+		game->grid[(int)(y - COLLISION_MARGIN)][(int)(x)] == '1' ||
+		game->grid[(int)(y)][(int)(x + COLLISION_MARGIN)] == '1' ||
+		game->grid[(int)(y)][(int)(x - COLLISION_MARGIN)] == '1' ||
+		game->grid[(int)(y + COLLISION_MARGIN)]
+			[(int)(x + COLLISION_MARGIN)] == '1' ||
+		game->grid[(int)(y - COLLISION_MARGIN)]
+			[(int)(x - COLLISION_MARGIN)] == '1'
+	);
 }

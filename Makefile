@@ -6,19 +6,20 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/09 12:32:49 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/09 19:39:55 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g
 MLX42		= ./MLX42
 LIBFT		= ./libft
 INCLUDES	= -I$(MLX42)/include -I$(LIBFT)/include -I ./include
 LIBS		= -L$(MLX42)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT) -lft
-
+HEADER		= include/cub3D.h
+NORMINETTE	= norminette sources include libft
 #TESTS
 
 VALGRIND = valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/texture.cub
@@ -46,11 +47,13 @@ SRC_FILES		= cub3D.c\
 					checks_2.c\
 					checks_3.c\
 					run.c\
+					run_2.c\
 					input.c\
 					input2.c\
 					render.c\
 					textures.c\
 					raycasting.c\
+					raycasting_2.c\
 					
 
 OBJS				= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -59,7 +62,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME): $(LIBFT)/libft.a $(MLX42)/build/libmlx42.a $(OBJS)
+$(NAME): $(LIBFT)/libft.a $(MLX42)/build/libmlx42.a $(OBJS) $(HEADER)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 	@echo "$(GREEN)Executable for cub3D launched successfully!$(RESET)"
 
@@ -77,6 +80,9 @@ all:$(NAME)
 valgrind:
 	$(VALGRIND)
 
+norminette:
+	$(NORMINETTE)
+
 clean:
 	@$(MAKE) -C $(LIBFT) clean
 	@$(RM) -r $(OBJ_DIR)
@@ -88,4 +94,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re valgrind norminette

@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:37:57 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/08 10:34:01 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:23:44 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_search_texture(t_map *game, char c)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = -1;
@@ -23,7 +23,7 @@ char	*ft_search_texture(t_map *game, char c)
 	{
 		if (game->grid[i][0] == c)
 		{
-			while(game->grid[i][++j] <= 32)
+			while (game->grid[i][++j] <= 32)
 				;
 			break ;
 		}
