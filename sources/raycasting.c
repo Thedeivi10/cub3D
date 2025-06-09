@@ -6,7 +6,7 @@
 /*   By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:38:15 by davigome          #+#    #+#             */
-/*   Updated: 2025/06/09 12:09:27 by davigome         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:45:23 by davigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,51 @@ void	calculate_projection(t_ray	*ray)
 	ray->lineheight = lineheight;
 }
 
+uint32_t	get_pixel_from_texture(mlx_image_t *img, int x, int y)
+{
+	if (!img || x < 0 || y < 0 || x >= (int)img->width || y >= (int)img->height)
+		return (0);
+	int i = (y * img->width + x) * 4;
+	return (
+		(img->pixels[i] << 24) |
+		(img->pixels[i + 1] << 16) |
+		(img->pixels[i + 2] << 8) |
+		(img->pixels[i + 3])
+	);
+}
+
 void	draw_wall_slice(t_map *game, t_ray *ray, int x)
+{
+	mlx_image_t *texture;
+
+	if (ray->side == 0)
+		texture = (ray->raydirx > 0) ? game->images.ea : game->images.we;
+	else
+		texture = (ray->raydiry > 0) ? game->images.so : game->images.no;
+
+	// Cálculo de wall_x
+	double wall_x;
+	if (ray->side == 0)
+		wall_x = game->player.y + ray->perpwalldist * ray->raydiry;
+	else
+		wall_x = game->player.x + ray->perpwalldist * ray->raydirx;
+	wall_x -= floor(wall_x);
+
+	int tex_x = (int)(wall_x * (double)texture->width);
+	if ((ray->side == 0 && ray->raydirx > 0) || (ray->side == 1 && ray->raydiry < 0))
+		tex_x = texture->width - tex_x - 1;
+
+	// Escalar y dibujar
+	for (int y = ray->drawstart; y < ray->drawend; y++)
+	{
+		int d = y * 256 - HEIGHT * 128 + ray->lineheight * 128;
+		int tex_y = (d * texture->height) / ray->lineheight / 256;
+		uint32_t color = get_pixel_from_texture(texture, tex_x, tex_y);
+		mlx_put_pixel(game->img, x, y, color);
+	}
+}
+
+/* void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 {
 	mlx_image_t *texture;
 	t_line line;
@@ -135,7 +179,7 @@ void	draw_wall_slice(t_map *game, t_ray *ray, int x)
 	line.color = color;
 
 	draw_vertical_line(game->img, line);
-}
+} */
 
 
 void	raycast_all_columns(t_map *game)
