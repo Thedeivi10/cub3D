@@ -6,7 +6,7 @@
 #    By: davigome <davigome@studen.42malaga.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 21:33:55 by davigome          #+#    #+#              #
-#    Updated: 2025/06/09 19:39:55 by davigome         ###   ########.fr        #
+#    Updated: 2025/06/30 16:26:01 by davigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME		= cub3D
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -g
+MAKEFLAGS += --no-print-directory
 MLX42		= ./MLX42
 LIBFT		= ./libft
 INCLUDES	= -I$(MLX42)/include -I$(LIBFT)/include -I ./include
@@ -71,8 +72,7 @@ $(LIBFT)/libft.a:
 
 $(MLX42)/build/libmlx42.a:
 	@echo "$(YELLOW)Building MLX42 library...$(RESET)"
-	@cmake -S $(MLX42) -B $(MLX42)/build
-	@cmake --build $(MLX42)/build -j4
+	@make -C $(MLX42)/build
 	@echo "$(GREEN)MLX42 library built successfully!$(RESET)"
 
 all:$(NAME)
@@ -86,7 +86,7 @@ norminette:
 clean:
 	@$(MAKE) -C $(LIBFT) clean
 	@$(RM) -r $(OBJ_DIR)
-	@$(RM) -r $(MLX42)/build
+	@$(MAKE) -C $(MLX42)/build clean
 
 fclean: clean
 	@$(RM) $(NAME)
